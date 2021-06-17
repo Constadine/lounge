@@ -17,7 +17,7 @@ def bob(request, pk):
 
     context = {'bob': bob, 'posts':posts, 'posts_count':posts_count}
 
-    return render(request, "base/bob.html", context)
+    return render(request, "base/bob_profile.html", context)
 
 
 def profile(request):
