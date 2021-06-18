@@ -5,3 +5,4 @@ from .models import *
 
 admin.site.register(Bob)
 admin.site.register(Post)
+admin.site.register(Tag)    

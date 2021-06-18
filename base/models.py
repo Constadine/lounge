@@ -11,6 +11,7 @@ class Bob(models.Model):
         ('Archbob', 'Archbob'),
         ('Masterbob', 'Masterbob'),
         ('Newbob', 'Newbob'), 
+        ('Failbob', 'Failbob'),
     )
 
     name = models.CharField(max_length=200, null=True)
@@ -21,7 +22,14 @@ class Bob(models.Model):
     def __str__(self) -> str:
         return self.name
 
+class Tag(models.Model):
 
+    name = models.CharField(max_length=200, null=True)
+    
+    def __str__(self) -> str:
+
+        return self.name    
+        
 class Post(models.Model):
     CATEGORY = (
         ('Bob Moment', 'Bob Moment'),
@@ -33,7 +41,11 @@ class Post(models.Model):
     body = models.TextField(max_length=600, null=True)
     category = models.CharField(max_length=200, null=True, choices=CATEGORY)
     date_posted = models.DateTimeField(auto_now_add=True, null=True)
+    tag = models.ManyToManyField(Tag)
 
 
     def __str__(self) -> str:
         return self.title
+
+
+
