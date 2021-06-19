@@ -9,8 +9,8 @@ def home(request):
     return render(request, "base/main.html", context)
 
 
-def bob(request, pk):
-    bob = Bob.objects.get(id=pk)
+def bob(request ,username=None):
+    bob = Bob.objects.get(name=username)
 
     posts = bob.post_set.all()
     posts_count = posts.count()

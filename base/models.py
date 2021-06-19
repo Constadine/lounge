@@ -31,15 +31,15 @@ class Tag(models.Model):
         return self.name    
         
 class Post(models.Model):
-    CATEGORY = (
-        ('Bob Moment', 'Bob Moment'),
-        ('Tech', 'Tech'),
-    )
+    # CATEGORY = (
+    #     ('Bob Moment', 'Bob Moment'),
+    #     ('Tech', 'Tech'),
+    # )
 
     title = models.CharField(max_length=200, null=True)
     author = models.ForeignKey(Bob, null=True, on_delete= models.SET_NULL)
     body = models.TextField(max_length=600, null=True)
-    category = models.CharField(max_length=200, null=True, choices=CATEGORY)
+    # category = models.CharField(max_length=200, null=True, choices=CATEGORY)
     date_posted = models.DateTimeField(auto_now_add=True, null=True)
     tag = models.ManyToManyField(Tag)
 
