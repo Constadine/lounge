@@ -4,23 +4,38 @@
 
 {% load static %}
 <!-- make the title clickable and body drop -->
-{% for post in posts %}
-<div class="card w-75">
-    <div class="card-header" id="blog-cards">
-        <h2>{{ post.title }}</h2> <small class="text-muted">{{ post.date_posted }}</small>
+
+<div class="row">
+    <div class="col-lg-8">
+        {% for post in posts %}
+        <div class="card w-100">
+            <div class="card-header" id="blog-cards">
+                <h2>{{ post.title }}</h2> <small class="text-muted">{{ post.date_posted }}</small>
+            </div>
+            <div class="card-body">
+                <blockquote class="blockquote mb-0">
+                    <p>{{ post.body|linebreaks }}</p>
+                    <a href="#">
+                        <footer class="blockquote-footer" id="author-names">{{ post.author }} <cite
+                                title="Source Title">{{post.author.title}}</cite>
+                        </footer>
+                    </a>
+                </blockquote>
+            </div>
+        </div>
+        <br>
+        {% endfor %}
     </div>
-    <div class="card-body">
-        <blockquote class="blockquote mb-0">
-            <p>{{ post.body|linebreaks }}</p>
-            <a href="#">
-                <footer class="blockquote-footer" id="author-names">{{ post.author }} <cite
-                        title="Source Title">{{post.author.title}}</cite>
-                </footer>
-            </a>
-        </blockquote>
+    <div class="col-lg-4" >
+        <div class="container" id='btn-cont'>
+            <button class=' btn-info post-btn btn-one'>
+                <span>Post</span>
+            </button>
+            <br>
+            <button class='btn-danger post-btn btn-one'>
+                <span>Delete</span>
+            </button>
+    </div>
     </div>
 </div>
-<br>
-{% endfor %}
-
 {% endblock %}
