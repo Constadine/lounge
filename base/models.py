@@ -12,6 +12,7 @@ class Bob(models.Model):
         ('Masterbob', 'Masterbob'),
         ('Newbob', 'Newbob'), 
         ('Failbob', 'Failbob'),
+        ('Lesbob', 'Lesbob'),
     )
 
     name = models.CharField(max_length=200, null=True)
