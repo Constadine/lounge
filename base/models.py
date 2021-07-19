@@ -1,4 +1,6 @@
 from django.db import models
+from django.contrib.auth.models import User
+
 from django.db.models.fields.related import ForeignKey
 from django.db.models.query import NamedValuesListIterable
 from django.shortcuts import resolve_url
@@ -14,6 +16,7 @@ class Bob(models.Model):
         ('Failbob', 'Failbob'),
         ('Lesbob', 'Lesbob'),
     )
+    user = models.OneToOneField(User, null=True, on_delete=models.CASCADE)
 
     name = models.CharField(max_length=200, null=True)
     title = models.CharField(max_length=200, null=True, choices=TITLE)
