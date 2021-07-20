@@ -5,7 +5,9 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required 
-from django.contrib.auth.models import Group
+from django.contrib.auth.models import Group, User
+
+
 
 
 from .models import *
@@ -13,28 +15,19 @@ from .forms import CreateUserForm
 from .decorators import admin_only, allowed_users, unauthenticated_user
 # Create your views here.
 
-
-
 @unauthenticated_user
 def registerPage(request):
     form = CreateUserForm()
 
     if request.method == "POST":
         form = CreateUserForm(request.POST)
+
         if form.is_valid():
-            user = form.save()
-            username = form.cleaned_data.get('username')
-
-            group = Group.objects.get(name='bob')  # fix this. what should name be equal to?
-            user.groups.add(group)
-
-            Bob.objects.create(
-                user=user,
-                name=user,
-            )
-            messages.success(request, 'Account was created for '+ username)
-
+            userino = form.cleaned_data
+            User.objects.create_user(userino.get('username'), userino.get('email'), userino.get('password1'))
+            messages.success(request, 'Account was created for '+ form.cleaned_data.get('username'))
             return redirect('login')
+
     context = {'form': form}
     return render(request, 'base/register.html', context)
 
@@ -66,7 +59,7 @@ def home(request):
 
 @login_required(login_url='login')
 def bob(request ,username=None):
-    bob = Bob.objects.get(name=username)
+    bob = User.objects.get(name=username)
 
     posts = bob.post_set.all()
     posts_count = posts.count()

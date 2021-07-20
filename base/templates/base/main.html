@@ -19,7 +19,7 @@
     {% include 'base/navbar.html' %}
 
     {% block content %}
-
+    <!-- 
     <div class="col-md-3 " id='chat-contacts-sidebar'>
         <div class="list-group">
             <a href="#" class="list-group-item list-group-item-action active" aria-current="true">
@@ -50,8 +50,20 @@
                 <span class="badge bg-primary rounded-pill">2</span>
             </a>
         </div>
-    </div>
+    </div> -->
+
+    <input type="button" class="btn btn-info" value="dota" onclick="relocate_home('dota')">
+    <input type="button" class="btn btn-info" value="byzgia" onclick="relocate_home('byzgia')">
+    <input type="button" class="btn btn-info" value="kanye" onclick="relocate_home('kanye')">
+
     {% endblock %}
+
+
+    <script>
+        function relocate_home(roomname) {
+            location.href = "chat/" + roomname;
+        }
+    </script>
 
 
 
