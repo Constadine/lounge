@@ -4,7 +4,10 @@ from django.contrib.auth.models import User
 from django.db.models.fields.related import ForeignKey
 from django.db.models.query import NamedValuesListIterable
 from django.shortcuts import resolve_url
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 
+from datetime import datetime
 # Create your models here.
 
 class Bob(models.Model):
@@ -16,15 +19,23 @@ class Bob(models.Model):
         ('Failbob', 'Failbob'),
         ('Lesbob', 'Lesbob'),
     )
-    user = models.OneToOneField(User, null=True, on_delete=models.CASCADE)
-
+    user = models.OneToOneField(User,related_name="profile", null=True, on_delete=models.CASCADE)
     name = models.CharField(max_length=200, null=True)
     title = models.CharField(max_length=200, null=True, choices=TITLE)
     contribution = models.IntegerField(max_length=200, null=True, default=0)
 
 
     def __str__(self) -> str:
-        return self.name
+        return self.name or '-'
+
+    @receiver(post_save, sender=User)
+    def create_user_profile(sender, instance, created, **kwargs):
+        if created:
+            Bob.objects.create(user=instance, name=instance.username)
+
+    @receiver(post_save, sender=User)
+    def save_user_profile(sender, instance, **kwargs):
+        instance.profile.save()
 
 class Tag(models.Model):
 
@@ -51,5 +62,14 @@ class Post(models.Model):
     def __str__(self) -> str:
         return self.title
 
+class Room(models.Model):
+    name = models.CharField(max_length=1000)
 
-
+    def __str__(self) -> str:
+        return self.name
+        
+class Message(models.Model):
+    value = models.CharField(max_length=1000000)
+    date = models.DateTimeField(default=datetime.now, blank=True)
+    user = models.CharField(max_length=100000)
+    room = models.CharField(max_length=100000)

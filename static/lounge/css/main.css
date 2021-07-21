@@ -46,17 +46,17 @@ a:hover{
       }
 
 
-  .btn-one {
+.btn-one {
     color: #000000ec;
     transition: all 0.3s;
     position: relative;
     border:none;
     border-radius: 8px;
-  }
-  .btn-one span {
-    transition: all 0.3s;
-  }
-  .btn-one::before {
+}
+.btn-one span {
+    transition: all 0.3s;  
+}
+.btn-one::before {
     content: '';
     position: absolute;
     bottom: 0;
@@ -73,15 +73,15 @@ a:hover{
     border-top-color: rgba(15, 1, 20, 0.699);
     border-bottom-color: rgba(27, 4, 36, 0.705);
     transform: scale(0.1, 1);
-  }
-  .btn-one:hover span {
+}
+.btn-one:hover span {
     letter-spacing: 1.5px;
-  }
-  .btn-one:hover::before {
+}
+.btn-one:hover::before {
     opacity: 1; 
     transform: scale(1, 1); 
-  }
-  .btn-one::after {
+}
+.btn-one::after {
     content: '';
     position: absolute;
     bottom: 0;
@@ -91,8 +91,61 @@ a:hover{
     z-index: 1;
     transition: all 0.3s;
     background-color: rgba(194, 183, 197, 0.082);
-  }
-  .btn-one:hover::after {
+}
+.btn-one:hover::after {
     opacity: 0; 
     transform: scale(0.1, 1);
-  }
+}
+
+.centered {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    /* bring your own prefixes */
+    transform: translate(-50%, -50%);
+}
+
+#chatcont {
+    top: 50%;
+    left: 50%;
+    border: 2px solid #dedede;
+    background-color: #f1f1f1;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 10px 0;
+}
+
+.darker {
+    border-color: #ccc;
+    background-color: #ddd;
+}
+
+.container::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+.container img {
+    float: left;
+    max-width: 60px;
+    width: 100%;
+    margin-right: 20px;
+    border-radius: 50%;
+}
+
+.container img.right {
+    float: right;
+    margin-left: 20px;
+    margin-right: 0;
+}
+
+.time-right {
+    float: right;
+    color: #aaa;
+}
+
+.time-left {
+    float: left;
+    color: #999;
+}

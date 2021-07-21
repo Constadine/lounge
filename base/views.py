@@ -1,18 +1,13 @@
-from django.shortcuts import render, redirect
-from django.forms import inlineformset_factory
-
-from django.contrib.auth.forms import UserCreationForm
-from django.contrib import messages
+from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
+from django.shortcuts import render, redirect
+from django.contrib import messages
 from django.contrib.auth.decorators import login_required 
-from django.contrib.auth.models import Group, User
-
-
-
 
 from .models import *
 from .forms import CreateUserForm
 from .decorators import admin_only, allowed_users, unauthenticated_user
+
 # Create your views here.
 
 @unauthenticated_user
@@ -23,8 +18,8 @@ def registerPage(request):
         form = CreateUserForm(request.POST)
 
         if form.is_valid():
-            userino = form.cleaned_data
-            User.objects.create_user(userino.get('username'), userino.get('email'), userino.get('password1'))
+            form.save()
+            # Bob.objects.create_user(user.get('username'), user.get('email'), user.get('password1'), name=user)
             messages.success(request, 'Account was created for '+ form.cleaned_data.get('username'))
             return redirect('login')
 
@@ -83,3 +78,24 @@ def blog(request):
     context = {'bobs':bobs, 'posts': posts}
 
     return render(request, "base/blog.html", context)
+
+
+def room(request, room):
+    username = request.GET.get('username')
+    room_details = Room.objects.get(name=room)
+    return render(request, 'base/chatroom.html', {
+        'username': username,
+        'room': room,
+        'room_details': room_details
+    })
+
+def checkview(request):
+    room = request.POST['room_name']
+    username = request.POST['username']
+
+    if Room.objects.filter(name=room).exists():
+        return redirect('/'+room+'/?username='+username)
+    else:
+        new_room = Room.objects.create(name=room)
+        new_room.save()
+        return redirect('/'+room+'/?username='+username)

@@ -11,6 +11,9 @@
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="{% static '/lounge/css/main.css' %}">
     <title>Lounge</title>
+    <style>
+
+    </style>
 </head>
 
 <body>
@@ -19,51 +22,75 @@
     {% include 'base/navbar.html' %}
 
     {% block content %}
-    <!-- 
-    <div class="col-md-3 " id='chat-contacts-sidebar'>
-        <div class="list-group">
-            <a href="#" class="list-group-item list-group-item-action active" aria-current="true">
-                <div class="d-flex w-100 justify-content-between">
-                    <h5 class="mb-1">List group item heading</h5>
-                    <small>3 days ago</small>
-                </div>
-                <p class="mb-1">Some placeholder content in a paragraph.</p>
-                <small>And some small print.</small>
-                <span class="badge bg-primary rounded-pill">2</span>
-            </a>
-            <a href="#" class="list-group-item list-group-item-action">
-                <div class="d-flex w-100 justify-content-between">
-                    <h5 class="mb-1">List group item heading</h5>
-                    <small class="text-muted">3 days ago</small>
-                </div>
-                <p class="mb-1">Some placeholder content in a paragraph.</p>
-                <small class="text-muted">And some muted small print.</small>
-                <span class="badge bg-primary rounded-pill">2</span>
-            </a>
-            <a href="#" class="list-group-item list-group-item-action">
-                <div class="d-flex w-100 justify-content-between">
-                    <h5 class="mb-1">List group item heading</h5>
-                    <small class="text-muted">3 days ago</small>
-                </div>
-                <p class="mb-1">Some placeholder content in a paragraph.</p>
-                <small class="text-muted">And some muted small print.</small>
-                <span class="badge bg-primary rounded-pill">2</span>
-            </a>
-        </div>
-    </div> -->
 
-    <input type="button" class="btn btn-info" value="dota" onclick="relocate_home('dota')">
-    <input type="button" class="btn btn-info" value="byzgia" onclick="relocate_home('byzgia')">
-    <input type="button" class="btn btn-info" value="kanye" onclick="relocate_home('kanye')">
+    <!-- <div class='centered'>
+    <input type="button" class="btn btn-info" href="">
+    <input type="button" class="btn btn-info" value="Room 2" onclick="relocate_home('room2')">
+    <input type="button" class="btn btn-info" value="Room 3" onclick="relocate_home('room3')">
+</div> -->
+
+
+
+    <div class="container centered" id="chatcont">
+        <div class="bobchat">
+            <h2>Bob Chat</h2>
+        </div>
+        <style>
+            input[type=text],
+            select {
+                width: 100%;
+                padding: 12px 20px;
+                margin: 8px 0;
+                display: inline-block;
+                border: 1px solid #ccc;
+                border-radius: 4px;
+                box-sizing: border-box;
+            }
+
+            input[type=submit] {
+                width: 100%;
+                background-color: #4CAF50;
+                color: white;
+                padding: 14px 20px;
+                margin: 8px 0;
+                border: none;
+                border-radius: 4px;
+                cursor: pointer;
+            }
+
+            input[type=submit]:hover {
+                background-color: #45a049;
+            }
+
+            div.bobchat {
+                border-radius: 5px;
+                background-color: #f2f2f2;
+                padding: 20px;
+                text-align: center;
+            }
+        </style>
+
+        <form id="post-form" method="POST" action="checkview">
+            {% csrf_token %}
+            <label>Room Name</label>
+            <input type="text" name="room_name" id="room_name" width="100px" />
+            <label>Username</label>
+            <input type="text" name="username" id="username" width="100px" />
+            <input type="submit" value="Enter Room">
+        </form>
+    </div>
+
+
+
 
     {% endblock %}
 
-
+    <!-- 
     <script>
         function relocate_home(roomname) {
             location.href = "chat/" + roomname;
         }
-    </script>
+    </script> -->
 
 
 
